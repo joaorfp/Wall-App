@@ -5,7 +5,7 @@ import Register from '../Pages/Register';
 function Router() {
   return (
     <Switch>
-      <Route path="/login" component={ Login } />
+      <Route path="/" component={ Login } />
       <Route path="/register" component={ Register } />
     </Switch>
   );
