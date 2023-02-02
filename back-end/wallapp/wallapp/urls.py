@@ -5,5 +5,6 @@ from myapp.views import CreateUserView, GetUsersView, UpdateUserView, DeleteUser
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', CreateUserView.as_view(), name='create'),
-    path('login/', GetUsersView.as_view(), name='login')
+    path('register/', GetUsersView.as_view(), name='login'),
+    path('', GetUsersView.as_view(), name='login')
 ]

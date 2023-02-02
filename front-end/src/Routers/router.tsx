@@ -1,14 +1,14 @@
-import { Switch, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Login from '../Pages/Login';
 import Register from '../Pages/Register';
+import Wall from '../Pages/Wall';
 
-function Router() {
+export default function Router() {
   return (
-    <Switch>
-      <Route path="/" component={ Login } />
-      <Route path="/register" component={ Register } />
-    </Switch>
+    <Routes>
+      <Route path="/register" element={ <Register /> } />
+      <Route path="/wall" element={ <Wall /> } />
+      <Route path="/" element={ <Login /> } />
+    </Routes>
   );
-}
-
-export default Router;
+};
