@@ -1,28 +1,24 @@
-from rest_framework import generics, viewsets
-from .models import Users
+from rest_framework import generics
+from django.contrib.auth.models import User
 from .serializers import UsersSerializer
+from django.db import IntegrityError
+from django.http.response import JsonResponse
 
-class RegisterViewSet(viewsets.ModelViewSet):
-    queryset = Users.objects.all()
+class UserMethods(generics.ListCreateAPIView):
     serializer_class = UsersSerializer
+    queryset = User.objects.all()
 
-class LoginViewSet(viewsets.ModelViewSet):
-    queryset = Users.objects.all()
-    serializer_class = UsersSerializer
+    def insertUser(self, request):
+        username = request.data['username']
+        email = request.data['email']
+        password = request.data['password']
 
-class CreateUserView(generics.CreateAPIView):
-    queryset = Users.objects.all()
-    serializer_class = UsersSerializer
+        try:
+            User.objects.create_user(
+                username,
+                email,
+                password,
+            )
+        except IntegrityError:
+            return JsonResponse({'error'})
 
-class GetUsersView(generics.ListAPIView):
-    queryset = Users.objects.all()
-    serializer_class = UsersSerializer
-
-class UpdateUserView(generics.UpdateAPIView):
-    queryset = Users.objects.all()
-    serializer_class = UsersSerializer
-
-class DeleteUserView(generics.DestroyAPIView):
-    queryset = Users.objects.all()
-    serializer_class = UsersSerializer
-# Create your views here.
