@@ -6,3 +6,6 @@ def valid_name(username):
 def valid_email(email):
     emailRegex = "^[a-zA-Z0-9-_]+@[a-zA-Z0-9]+\.[a-z]{1,3}$"
     return re.findall(emailRegex, email)
+
+def valid_password(password):
+    return len(password) >= 6

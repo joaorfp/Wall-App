@@ -5,7 +5,6 @@ export default function Wall() {
   const [postBool, setPostBool] = useState(true);
   const [msg, setMsg] = useState('');
 
-
   const submitMessage = () => {
     setPostBool(false);
     setPost('');
