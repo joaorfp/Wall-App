@@ -1,6 +1,5 @@
 from django.db.models import (
     Model,
-    DateTimeField,
     CharField,
     TextField,
     BooleanField,

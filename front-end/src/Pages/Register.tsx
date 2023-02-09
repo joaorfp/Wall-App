@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import IUser from "../interfaces/IUser";
@@ -32,7 +32,7 @@ export default function Register() {
     }
 
     try {
-      const { data } = await axios.post('http://127.0.0.1:8000/', params);
+      const data = await axios.post('http://127.0.0.1:8000/', params);
       console.log(data);
       navigate('/wall');
     } catch ({ response }) {

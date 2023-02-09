@@ -1,10 +1,14 @@
 from rest_framework import generics
 from django.contrib.auth.models import User
-from .serializers import UsersSerializer
+from .serializers import UsersSerializer, MessageSerializer
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from django.db import IntegrityError
 from rest_framework.permissions import AllowAny
 from django.http.response import JsonResponse
 from django.core.mail import send_mail
+from .models import Message
+from .permissions import IsOwnerOrReadOnly
+from decouple import config
 
 class UserMethods(generics.ListCreateAPIView):
     serializer_class = UsersSerializer
@@ -32,11 +36,28 @@ class UserMethods(generics.ListCreateAPIView):
                 f'Welcome to Wall App, {username}.',
                 f'Welcome to Wall App, {username}. Feel free to write your messages on the wall after logging in!',
                 f'{sender}',
-                [request.data['email']],
+                [email],
                 fail_silently=False,
             )
         except:
             print('Error on sending the email to the new user')
 
         return JsonResponse({'User created': f'User {username} created'}, status=201)
+
+
+class MessageList(generics.ListCreateAPIView):
+    serializer_class = MessageSerializer
+    queryset = Message.objects.all().order_by('id')
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+
+class MessageDetails(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = MessageSerializer
+    queryset = Message.objects.all().order_by('id')
+    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+
+
 
