@@ -6,9 +6,9 @@ import Wall from '../Pages/Wall';
 export default function Router() {
   return (
     <Routes>
-      <Route path="/register" element={ <Register /> } />
+      <Route path="/" element={ <Register /> } />
       <Route path="/wall" element={ <Wall /> } />
-      <Route path="/" element={ <Login /> } />
+      <Route path="/login" element={ <Login /> } />
     </Routes>
   );
 };

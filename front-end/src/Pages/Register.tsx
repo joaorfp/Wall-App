@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import IUser from "../interfaces/IUser";
@@ -21,22 +21,22 @@ export default function Register() {
     event.preventDefault();
     const {
       inputEmail: { value: email },
-      inputName: { value: name },
+      inputName: { value: username },
       inputPassword: { value: password },
     } = event?.currentTarget?.elements;
 
     const params: IUser = {
-      name,
+      username,
       email,
       password,
     }
 
     try {
-      const { data } = await axios.post('http://127.0.0.1:8000/register/', params);
+      const data = await axios.post('http://127.0.0.1:8000/', params);
       console.log(data);
       navigate('/wall');
-    } catch (error) {
-      console.log(error);
+    } catch ({ response }) {
+      console.log(response);
     }
   }
 
