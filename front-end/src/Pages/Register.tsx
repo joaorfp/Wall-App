@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import IUser from "../interfaces/IUser";
+import { getToken, insertUser } from "../Services/request";
 
 interface FormElements extends HTMLFormControlsCollection {
   inputName: HTMLInputElement;
@@ -31,13 +31,13 @@ export default function Register() {
       password,
     }
 
-    try {
-      const data = await axios.post('http://127.0.0.1:8000/', params);
-      console.log(data);
-      navigate('/wall');
-    } catch ({ response }) {
-      console.log(response);
-    }
+    const a = await insertUser(params)
+    console.log(a);
+    
+
+    const data = getToken(username, password)
+    console.log(data);
+    // navigate('/wall');
   }
 
   return(

@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'myapp',
-
 ]
 
 MIDDLEWARE = [
@@ -82,10 +81,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'setup.wsgi.application'
 
 CORS_ORIGIN_ALLOW_ALL = True
-
-CORS_ORIGIN_WHITELIST = [
-    "http://localhost:3000",
-]
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases

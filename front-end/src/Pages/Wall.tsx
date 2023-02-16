@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import IMessage from "../interfaces/IMessage";
+import Post from "../Components/Post";
 
 interface FormElements extends HTMLFormControlsCollection {
   message: HTMLInputElement;
@@ -12,28 +13,44 @@ interface RegisterForm extends HTMLFormElement {
 }
 
 export default function Wall() {
+  // const [data, setData] = useState([]);
+
   const submitMessage = async (event: React.FormEvent<RegisterForm>) => {
-    event.preventDefault();
+    // event.preventDefault();
 
-    const {
-      title: { value: title },
-      message: { value: message },
-    } = event?.currentTarget?.elements;
+    // const {
+    //   title: { value: title },
+    //   message: { value: message },
+    // } = event?.currentTarget?.elements;
 
-    const params: IMessage = {
-      title,
-      message,
-    }    
+    // const params: IMessage = {
+    //   title,
+    //   message,
+    //   ...
+    // }    
 
-    try {
-      const { data } = await axios.post('http://127.0.0.1:8000/wall/', params)
-      console.log(data);
-    } catch ({ response }) {
-      console.log(response);
+    // try {
+    //   const { data } = await insertPost(token, params)
+    //   console.log(data);
+    // } catch ({ response }) {
+    //   console.log(response);
       
-    }
+    // }
 
   };
+
+  // useEffect(() => {
+  //   async function getData() {
+  //     try {
+  //       const datas = await getPosts();
+  //       console.log(datas);
+  //       // setData(datas)
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  //   getData();
+  // }, []);
 
   return (
     <div>
@@ -56,6 +73,9 @@ export default function Wall() {
           Post message
         </button>
       </form>
+      {/* { data.map(({ title, message }) => (
+          <Post title={ title } message={ message } />
+      )) } */}
     </div>
   )
 }

@@ -15,19 +15,17 @@ class UserMethods(generics.ListCreateAPIView):
     queryset = User.objects.all()
     permission_classes = [AllowAny]
 
-    def insertUser(self, request):
+    def post(self, request):
         username = request.data['username']
-        email = request.data['email']
-        password = request.data['password']
         
         try:
             User.objects.create_user(
-                username,
-                email,
-                password,
+                username=request.data['username'],
+                email=request.data['email'],
+                password=request.data['password'],
             )
         except IntegrityError:
-            return JsonResponse({'error'})
+            return JsonResponse({"Error": True, "message": 'Username or Email already exists'})
 
         sender = config('EMAIL_SENDER')
 
@@ -36,13 +34,13 @@ class UserMethods(generics.ListCreateAPIView):
                 f'Welcome to Wall App, {username}.',
                 f'Welcome to Wall App, {username}. Feel free to write your messages on the wall after logging in!',
                 f'{sender}',
-                [email],
+                [request.data['email']],
                 fail_silently=False,
             )
         except:
             print('Error on sending the email to the new user')
 
-        return JsonResponse({'User created': f'User {username} created'}, status=201)
+        return JsonResponse({"Welcome aboard": f', {username}'}, status=201)
 
 
 class MessageList(generics.ListCreateAPIView):
