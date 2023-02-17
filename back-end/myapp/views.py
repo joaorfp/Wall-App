@@ -17,6 +17,7 @@ class UserMethods(generics.ListCreateAPIView):
 
     def post(self, request):
         username = request.data['username']
+        email = request.data['email'],
         
         try:
             User.objects.create_user(

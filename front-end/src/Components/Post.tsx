@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Post(title, message) {
+function Post(title: string, message: string) {
   return (
     <div>
       <header>{title}</header>

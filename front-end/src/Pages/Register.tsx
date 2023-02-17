@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import IUser from "../interfaces/IUser";
-import { getToken, insertUser } from "../Services/request";
+import { getToken, insertUser, setToken } from "../Services/request";
 
 interface FormElements extends HTMLFormControlsCollection {
   inputName: HTMLInputElement;
@@ -16,8 +16,12 @@ interface RegisterForm extends HTMLFormElement {
 export default function Register() {
   const navigate = useNavigate();
 
+  useEffect(() => {
+    localStorage.removeItem('token')
+    localStorage.removeItem('username')
+  }, [])
+
   const registerBtn = async (event: React.FormEvent<RegisterForm>) => {
-    
     event.preventDefault();
     const {
       inputEmail: { value: email },
@@ -31,19 +35,18 @@ export default function Register() {
       password,
     }
 
-    const a = await insertUser(params)
-    console.log(a);
-    
-
-    const data = getToken(username, password)
-    console.log(data);
-    // navigate('/wall');
+    await insertUser(params)    
+    const { data: { token } } = await getToken(username, password)
+    localStorage.setItem('token', token)
+    localStorage.setItem('username', username)
+    setToken()
+    navigate('/wall');
   }
 
   return(
     <div>
       <div>
-        <form onSubmit={registerBtn}>
+        <form onSubmit={ registerBtn }>
           <label htmlFor="inputName">
             <input
               type="text"
@@ -51,7 +54,7 @@ export default function Register() {
               name="inputName"
               id="inputName"
               required
-              minLength={6}
+              minLength={ 6 }
             />
           </label>
           <label htmlFor="inputEmail">
@@ -77,6 +80,13 @@ export default function Register() {
             type="submit"
           >
             Register
+          </button>
+          <span>Already have an account?</span>
+          <button
+            type="button"
+            onClick={ () => navigate('/login') }
+          >
+            Sign in
           </button>
           {/* { boolean ? <></> : <span>Incorrect form.
               Remember that you have to use a valid email, a username with 3+ characters and a password
