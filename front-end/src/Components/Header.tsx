@@ -7,13 +7,17 @@ export default function Header() {
 
   useEffect(() => {
     const storedName = localStorage.getItem('username')
-    if (storedName) setUsername(storedName)
+    if (storedName) {
+      setUsername(storedName)
+    } else {
+      setUsername('Guest');
+    }
   }, [])
 
   const logout = () => {
-    localStorage.removeItem('token')
-    localStorage.removeItem('username')
-    navigate('/register')
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    navigate('/');
   }
 
   return (

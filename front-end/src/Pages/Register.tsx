@@ -39,7 +39,13 @@ export default function Register() {
     const { data: { token } } = await getToken(username, password)
     localStorage.setItem('token', token)
     localStorage.setItem('username', username)
-    setToken()
+    setToken();
+    navigate('/wall');
+  }
+
+  const guestBtn = () => {
+    localStorage.removeItem('username');
+    localStorage.removeItem('token');
     navigate('/wall');
   }
 
@@ -88,10 +94,9 @@ export default function Register() {
           >
             Sign in
           </button>
-          {/* { boolean ? <></> : <span>Incorrect form.
-              Remember that you have to use a valid email, a username with 3+ characters and a password
-              with 6+ characters
-            </span> } */}
+          <button type="button" onClick={ guestBtn }>
+            Enter as Guest
+          </button>
         </form>
       </div>
     </div>

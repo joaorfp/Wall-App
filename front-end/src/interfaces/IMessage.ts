@@ -1,5 +1,5 @@
 export default interface IMessage {
-  id?: number;
+  id?: number | undefined;
   title: string;
   message: string;
 }

@@ -1,12 +1,11 @@
 import React from 'react'
+import IMessage from '../interfaces/IMessage'
 
-function Post(title: string, message: string) {
+export default function Post({ title, message }: IMessage) {
   return (
     <div>
-      <header>{title}</header>
-      <p>{message}</p>
+      <p>{ title }</p>
+      <p>{ message }</p>
     </div>
   )
 }
-
-export default Post

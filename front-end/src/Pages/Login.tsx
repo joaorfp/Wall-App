@@ -62,6 +62,13 @@ export default function Login() {
           >
             Login
           </button>
+          <span>Do not have an account?</span>
+          <button
+            type="button"
+            onClick={ () => navigate('/') }
+          >
+            Register
+          </button>
         </form>
       </div>
     </div>

@@ -15,7 +15,7 @@ import { getPosts } from "../Services/request";
 // }
 
 export default function Wall() {
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     async function getData() {
@@ -23,7 +23,7 @@ export default function Wall() {
       setData(data)
     }
     getData();
-  }, [])
+  }, [data])
 
   return (
     <div>
