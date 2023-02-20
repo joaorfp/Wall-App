@@ -16,10 +16,10 @@ interface RegisterForm extends HTMLFormElement {
 export default function Register() {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    localStorage.removeItem('token')
-    localStorage.removeItem('username')
-  }, [])
+  // useEffect(() => {
+  //   const token = localStorage.getItem('token')
+  //   if (token) navigate('/wall')
+  // }, [navigate])
 
   const registerBtn = async (event: React.FormEvent<RegisterForm>) => {
     event.preventDefault();
@@ -35,17 +35,17 @@ export default function Register() {
       password,
     }
 
-    await insertUser(params)    
-    const { data: { token } } = await getToken(username, password)
-    localStorage.setItem('token', token)
-    localStorage.setItem('username', username)
+    await insertUser(params);
+    const { data: { token } } = await getToken(username, password);
+    localStorage.setItem('token', token);
+    localStorage.setItem('username', username);
     setToken();
     navigate('/wall');
   }
 
   const guestBtn = () => {
-    localStorage.removeItem('username');
     localStorage.removeItem('token');
+    localStorage.removeItem('username');
     navigate('/wall');
   }
 
@@ -85,19 +85,21 @@ export default function Register() {
           <button
             type="submit"
           >
-            Register
-          </button>
-          <span>Already have an account?</span>
-          <button
-            type="button"
-            onClick={ () => navigate('/login') }
-          >
-            Sign in
-          </button>
-          <button type="button" onClick={ guestBtn }>
-            Enter as Guest
+            Sign up
           </button>
         </form>
+          <div>
+            <span>Already have an account?</span>
+            <button
+              type="button"
+              onClick={ () => navigate('/login') }
+            >
+              Sign in
+            </button>
+            <button type="button" onClick={ guestBtn }>
+              Enter as a guest
+            </button>
+          </div>
       </div>
     </div>
   )

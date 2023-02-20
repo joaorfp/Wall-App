@@ -17,7 +17,6 @@ class UserMethods(generics.ListCreateAPIView):
 
     def post(self, request):
         username = request.data['username']
-        email = request.data['email'],
         
         try:
             User.objects.create_user(
@@ -57,6 +56,3 @@ class MessageDetails(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = MessageSerializer
     queryset = Message.objects.all().order_by('id')
     permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
-
-
-

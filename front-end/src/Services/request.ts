@@ -33,18 +33,18 @@ export const insertUser = async ({ username, password, email }: IUser) => {
 
 export const getPosts = async () => {
   try {
-    const { data } = await api.get('/wall/')
-    return data
+    const { data } = await api.get('/wall/');
+    return data;
   } catch({ response }) {
     return response;
   }
 }
 
  
-export const insertPost = async (postedMessage: string, title: string, owner: string) => {
+export const insertPost = async (title: string, message: string, owner: string) => {
   try {
     const { data } = await api.post('/wall/', {
-      posted_message: postedMessage,
+      message,
       is_active: true,
       title,
       owner,
@@ -55,7 +55,23 @@ export const insertPost = async (postedMessage: string, title: string, owner: st
   }
 }
 
-// export const updatePost = async () => {
-  // setToken()
+export const deletePostById = async (id: number) => {
+  try {
+    const { data } = await api.delete(`/wall/${id}/`);
+    return data;
+  } catch ({ response }) {
+    return response;
+  }
+}
 
-// }
+export const updatePostById = async (title: string, message: string, id: number) => {
+  try {
+    const { data } = await api.put(`/wall/${id}/`, {
+      message,
+      title,
+    });
+    return data;
+  } catch ({ response }) {
+    return response;
+  }
+}

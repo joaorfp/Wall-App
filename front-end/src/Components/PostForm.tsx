@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { insertPost, setToken } from '../Services/request';
+import useData from '../Hooks/useData';
 
 interface FormElements extends HTMLFormControlsCollection {
   title: HTMLInputElement;
@@ -11,6 +12,9 @@ interface RegisterForm extends HTMLFormElement {
 }
 
 function PostForm() {
+  const [auth, setAuth] = useState(false)
+  const { getData } = useData();
+
   useEffect(() => {
     const owner = localStorage.getItem('username');
     if (owner) {
@@ -19,7 +23,6 @@ function PostForm() {
     }
   }, [])
 
-  const [auth, setAuth] = useState(false)
   const submitPost = async (event: React.FormEvent<RegisterForm>) => {
     event.preventDefault();
     const {
@@ -29,6 +32,7 @@ function PostForm() {
 
     const owner = localStorage.getItem('username');
     owner && await insertPost(title.value, message.value, owner);
+    getData();
   }
 
   return (
@@ -60,7 +64,9 @@ function PostForm() {
               Submit Message
             </button>
           </form>
-        ) : null }
+        ) : (
+          <span>Sign up to write on the wall!</span>
+        ) }
       </div>
     </div>
   )

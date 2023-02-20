@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 
-export default function Header() {
+function Header() {
   const [username, setUsername] = useState('');
   const navigate = useNavigate()
 
@@ -12,7 +12,7 @@ export default function Header() {
     } else {
       setUsername('Guest');
     }
-  }, [])
+  }, []);
 
   const logout = () => {
     localStorage.removeItem('token');
@@ -30,3 +30,5 @@ export default function Header() {
     </header>
   )
 }
+
+export default Header;

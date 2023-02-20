@@ -1,29 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import IMessage from "../interfaces/IMessage";
 import Post from "../Components/Post";
 import PostForm from "../Components/PostForm";
 import Header from "../Components/Header";
-import { getPosts } from "../Services/request";
-
-// interface FormElements extends HTMLFormControlsCollection {
-//   message: HTMLInputElement;
-//   title: HTMLInputElement;
-// }
-
-// interface RegisterForm extends HTMLFormElement {
-//   readonly elements: FormElements;
-// }
+import useData from "../Hooks/useData";
 
 export default function Wall() {
-  const [data, setData] = useState([]);
+  const storage = localStorage.getItem('username');
+  const { data, getData } = useData();
 
   useEffect(() => {
-    async function getData() {
-      const data = await getPosts();
-      setData(data)
-    }
     getData();
-  }, [data])
+    // This warning is being disabled because useEffect should only be called on component mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div>
@@ -31,8 +21,8 @@ export default function Wall() {
       <PostForm />
       <div>
         { data && (
-          data.map(({ title, message, id }: IMessage) => (
-            <Post key={ id } title={ title } message={ message } />
+          data.map(({ title, message, id, owner }: IMessage) => (
+            <Post key={ id } title={ title } message={ message } isOwner={ storage === owner } id={ id } />
           )
         )) }
       </div>

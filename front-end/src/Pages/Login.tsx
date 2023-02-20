@@ -22,16 +22,18 @@ export default function Login() {
     } = event?.currentTarget?.elements;
 
     try {
-      const { data: { token }} = await getToken(username.value, password.value)
+      const { data: { token }} = await getToken(username.value, password.value);
       if (token) {
-        localStorage.setItem('token', token)
-        localStorage.setItem('username', username.value)
-        setToken()
+        localStorage.setItem('token', token);
+        localStorage.setItem('username', username.value);
+        setToken();
         navigate('/wall');
       }      
     } catch (error) {
       console.log(error);
       alert('Bad Request: You must type valid credentials');
+      username.value = '';
+      password.value = '';
     }
   }
 
@@ -67,7 +69,7 @@ export default function Login() {
             type="button"
             onClick={ () => navigate('/') }
           >
-            Register
+            Sign up
           </button>
         </form>
       </div>
