@@ -8,8 +8,6 @@ from django.http.response import JsonResponse
 from django.core.mail import send_mail
 from .models import Message
 from .permissions import IsOwnerOrReadOnly
-from decouple import config
-from django.conf import settings
 
 class UserMethods(generics.ListCreateAPIView):
     serializer_class = UsersSerializer
