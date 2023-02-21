@@ -31,6 +31,7 @@ export default function EditPost() {
       <div>
         <form onSubmit={ editPost }>
           <label htmlFor="title">
+            Title:
             <input
               type="text"
               placeholder="Type the title for your post"
@@ -40,6 +41,7 @@ export default function EditPost() {
             />
           </label>
           <label htmlFor="message">
+            Message:
             <input
               type="text"
               placeholder="Type your message"

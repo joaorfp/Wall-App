@@ -7,8 +7,8 @@ export default function Post({ title, message, isOwner, id }: IMessage) {
   
   return (
     <div>
-      <h4>{ title }</h4>
-      <h5>{ message }</h5>
+      <h4>{`Title: ${title}`}</h4>
+      <h5>{`Message: ${message}`}</h5>
       { isOwner ? (
         <div>
           <button

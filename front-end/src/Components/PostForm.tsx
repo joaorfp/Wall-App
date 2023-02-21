@@ -41,6 +41,7 @@ function PostForm() {
         { auth ? (
           <form onSubmit={ submitPost }>
             <label htmlFor="title">
+              Title:
               <input
                 type="text"
                 placeholder="Type the title for your post"
@@ -50,6 +51,7 @@ function PostForm() {
               />
             </label>
             <label htmlFor="message">
+              Message:
               <input
                 type="text"
                 placeholder="Type your message"
