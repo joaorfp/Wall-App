@@ -8,41 +8,36 @@ from django.http.response import JsonResponse
 from django.core.mail import send_mail
 from .models import Message
 from .permissions import IsOwnerOrReadOnly
-from decouple import config
 
 class UserMethods(generics.ListCreateAPIView):
     serializer_class = UsersSerializer
     queryset = User.objects.all()
     permission_classes = [AllowAny]
 
-    def insertUser(self, request):
+    def post(self, request):
         username = request.data['username']
-        email = request.data['email']
-        password = request.data['password']
         
         try:
             User.objects.create_user(
-                username,
-                email,
-                password,
+                username=request.data['username'],
+                email=request.data['email'],
+                password=request.data['password'],
             )
         except IntegrityError:
-            return JsonResponse({'error'})
-
-        sender = config('EMAIL_SENDER')
+            return JsonResponse({"Error": True, "message": 'Username or Email already exists'})
 
         try:
             send_mail(
                 f'Welcome to Wall App, {username}.',
-                f'Welcome to Wall App, {username}. Feel free to write your messages on the wall after logging in!',
-                f'{sender}',
-                [email],
+                f'Welcome to Wall App, {username}. Feel free to write your messages on the wall!',
+                'settings.EMAIL_HOST_USER',
+                [request.data['email']],
                 fail_silently=False,
             )
         except:
             print('Error on sending the email to the new user')
 
-        return JsonResponse({'User created': f'User {username} created'}, status=201)
+        return JsonResponse({"Welcome aboard": f', {username}'}, status=201)
 
 
 class MessageList(generics.ListCreateAPIView):
@@ -58,6 +53,3 @@ class MessageDetails(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = MessageSerializer
     queryset = Message.objects.all().order_by('id')
     permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
-
-
-

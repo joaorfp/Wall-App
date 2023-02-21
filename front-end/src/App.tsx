@@ -1,8 +1,11 @@
 import Router from './Routers/router';
+import DataProvider from './Context/DataProvider'
 
 function App() {
   return (
-    <Router />
+    <DataProvider>
+      <Router />
+    </DataProvider>
   );
 }
 
