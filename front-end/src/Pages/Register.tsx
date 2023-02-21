@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import IUser from "../interfaces/IUser";
+import { getToken, insertUser, setToken } from "../Services/request";
 
 interface FormElements extends HTMLFormControlsCollection {
   inputName: HTMLInputElement;
@@ -16,34 +16,43 @@ interface RegisterForm extends HTMLFormElement {
 export default function Register() {
   const navigate = useNavigate();
 
+  // useEffect(() => {
+  //   const token = localStorage.getItem('token')
+  //   if (token) navigate('/wall')
+  // }, [navigate])
+
   const registerBtn = async (event: React.FormEvent<RegisterForm>) => {
-    
     event.preventDefault();
     const {
       inputEmail: { value: email },
-      inputName: { value: name },
+      inputName: { value: username },
       inputPassword: { value: password },
     } = event?.currentTarget?.elements;
 
     const params: IUser = {
-      name,
+      username,
       email,
       password,
     }
 
-    try {
-      const { data } = await axios.post('http://127.0.0.1:8000/register/', params);
-      console.log(data);
-      navigate('/wall');
-    } catch (error) {
-      console.log(error);
-    }
+    await insertUser(params);
+    const { data: { token } } = await getToken(username, password);
+    localStorage.setItem('token', token);
+    localStorage.setItem('username', username);
+    setToken();
+    navigate('/wall');
+  }
+
+  const guestBtn = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    navigate('/wall');
   }
 
   return(
     <div>
       <div>
-        <form onSubmit={registerBtn}>
+        <form onSubmit={ registerBtn }>
           <label htmlFor="inputName">
             <input
               type="text"
@@ -51,7 +60,7 @@ export default function Register() {
               name="inputName"
               id="inputName"
               required
-              minLength={6}
+              minLength={ 6 }
             />
           </label>
           <label htmlFor="inputEmail">
@@ -76,13 +85,21 @@ export default function Register() {
           <button
             type="submit"
           >
-            Register
+            Sign up
           </button>
-          {/* { boolean ? <></> : <span>Incorrect form.
-              Remember that you have to use a valid email, a username with 3+ characters and a password
-              with 6+ characters
-            </span> } */}
         </form>
+          <div>
+            <span>Already have an account?</span>
+            <button
+              type="button"
+              onClick={ () => navigate('/login') }
+            >
+              Sign in
+            </button>
+            <button type="button" onClick={ guestBtn }>
+              Enter as a guest
+            </button>
+          </div>
       </div>
     </div>
   )
