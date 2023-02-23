@@ -1,5 +1,5 @@
-import { useContext } from "react";
-import { DataContext, DataContextInterface } from "../Context/DataProvider";
+import { useContext } from 'react';
+import { DataContext, DataContextInterface } from '../Context/DataProvider';
 
 function useData(): DataContextInterface {
   const context = useContext(DataContext);

@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
-import IMessage from "../interfaces/IMessage";
-import Post from "../Components/Post";
-import PostForm from "../Components/PostForm";
-import Header from "../Components/Header";
-import useData from "../Hooks/useData";
+import React, { useEffect } from 'react';
+import IMessage from '../interfaces/IMessage';
+import Post from '../Components/Post';
+import PostForm from '../Components/PostForm';
+import Header from '../Components/Header';
+import useData from '../Hooks/useData';
+import '../Styles/Wall.css';
 
 export default function Wall() {
   const storage = localStorage.getItem('username');
@@ -11,21 +12,24 @@ export default function Wall() {
 
   useEffect(() => {
     getData();
-    // This warning is being disabled because useEffect should only be called on component mount
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div>
+    <div className="wall">
       <Header />
       <PostForm />
-      <div>
-        { data && (
+      <div className="posts-div">
+        {data &&
           data.map(({ title, message, id, owner }: IMessage) => (
-            <Post key={ id } title={ title } message={ message } isOwner={ storage === owner } id={ id } />
-          )
-        )) }
+            <Post
+              key={id}
+              title={title}
+              message={message}
+              isOwner={storage === owner}
+              id={id}
+            />
+          ))}
       </div>
     </div>
-  )
+  );
 }

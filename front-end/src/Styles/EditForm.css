@@ -1,0 +1,69 @@
+.main-div-edit {
+  align-items: center;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)) , url('../images/macos-monterey-stock-blue-light-layers-5k-4480x2520-5898.jpg');
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.div-input-form {
+  align-items: center;
+  backdrop-filter: blur(15px);
+  background-color: transparent;
+  border: 2px solid white;
+  border-radius: 20px;
+  display: flex;
+  height: 300px;
+  justify-content: center;
+  position: relative;
+  width: 700px;
+}
+
+.input-form {
+  border-bottom: 2px solid black;
+  margin: 30px 0;
+  width: 310px;
+}
+
+.input-form label {
+  font-size: 1em;
+  left: 5px;
+  pointer-events: none;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+input:focus ~ label, input:focus ~ :valid {
+  top: -5px;
+}
+
+.input-form input {
+  background: transparent;
+  border: none;
+  color: black;
+  font-size: 1em;
+  height: 50px;
+  outline: none;
+  padding: 0 35px 0 5px;
+  width: 100%;
+}
+
+.btn-edit {
+  background-color: white;
+  border: none;
+  border-radius: 40px;
+  color: black;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 600;
+  height: 40px;
+  outline: none;
+  width: 100%;
+}
+
+.previous {
+  color: white;
+  font-size: 2em;
+}

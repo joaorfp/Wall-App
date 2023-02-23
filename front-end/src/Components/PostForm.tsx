@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { insertPost, setToken } from '../Services/request';
 import useData from '../Hooks/useData';
+import '../Styles/PostForm.css';
 
 interface FormElements extends HTMLFormControlsCollection {
   title: HTMLInputElement;
@@ -12,7 +13,7 @@ interface RegisterForm extends HTMLFormElement {
 }
 
 function PostForm() {
-  const [auth, setAuth] = useState(false)
+  const [auth, setAuth] = useState(false);
   const { getData } = useData();
 
   useEffect(() => {
@@ -21,57 +22,54 @@ function PostForm() {
       setToken();
       setAuth(true);
     }
-  }, [])
+  }, []);
 
   const submitPost = async (event: React.FormEvent<RegisterForm>) => {
     event.preventDefault();
-    const {
-      title,
-      message,
-    } = event?.currentTarget?.elements;
+    const { title, message } = event?.currentTarget?.elements;
 
     const owner = localStorage.getItem('username');
-    owner && await insertPost(title.value, message.value, owner);
+    owner && (await insertPost(title.value, message.value, owner));
+    title.value = '';
+    message.value = '';
     getData();
-  }
+  };
 
   return (
-    <div>
-      <div>
-        { auth ? (
-          <form onSubmit={ submitPost }>
-            <label htmlFor="title">
-              Title:
+    <div className="main-div-wall">
+      <div className="div-input-form">
+        {auth ? (
+          <form onSubmit={submitPost}>
+            <div className="input-form">
+              <label htmlFor="title">Title</label>
               <input
                 type="text"
-                placeholder="Type the title for your post"
+                maxLength={50}
                 name="title"
                 id="title"
                 required
               />
-            </label>
-            <label htmlFor="message">
-              Message:
+            </div>
+            <div className="input-form">
+              <label htmlFor="message">Message</label>
               <input
                 type="text"
-                placeholder="Type your message"
+                maxLength={80}
                 name="message"
                 id="message"
                 required
               />
-            </label>
-            <button
-              type='submit'
-            >
-              Submit Message
+            </div>
+            <button type="submit" className="button-submit">
+              Submit Post
             </button>
           </form>
         ) : (
-          <span>Sign up to write on the wall!</span>
-        ) }
+          <span className="warning">Sign up to write on the wall!</span>
+        )}
       </div>
     </div>
-  )
+  );
 }
 
 export default PostForm;

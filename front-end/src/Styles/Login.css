@@ -1,0 +1,75 @@
+.main-login {
+  align-items: center;
+  background-image: url('../images/macos-monterey-stock-blue-light-layers-5k-4480x2520-5898.jpg');
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.div-inputs-login {
+  align-items: center;
+  backdrop-filter: blur(15px);
+  background-color: transparent;
+  border: 2px solid white;
+  border-radius: 20px;
+  display: flex;
+  height: 500px;
+  justify-content: center;
+  position: relative;
+  width: 400px;
+}
+
+h2 {
+  color: white;
+  font-size: 2em;
+  text-align: center;
+}
+
+.inputbox {
+  border-bottom: 2px solid white;
+  margin: 30px 0;
+  width: 310px;
+}
+
+.inputbox label {
+  color: white;
+  font-size: 1em;
+  left: 5px;
+  pointer-events: none;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+input:focus ~ label, input:focus ~ :valid {
+  top: -5px;
+}
+
+.inputbox input {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1em;
+  height: 50px;
+  outline: none;
+  padding: 0 35px 0 5px;
+  width: 100%;
+}
+
+.button {
+  background-color: white;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 600;
+  height: 40px;
+  outline: none;
+  width: 100%;
+}
+
+.account {
+  color: white;
+  font-size: 1em;
+  text-align: center;
+}

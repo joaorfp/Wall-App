@@ -1,5 +1,6 @@
+import React from 'react';
 import Router from './Routers/router';
-import DataProvider from './Context/DataProvider'
+import DataProvider from './Context/DataProvider';
 
 function App() {
   return (
