@@ -1,0 +1,22 @@
+* {
+  font-family: Montserrat , sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.posts-div {
+  align-items: center;
+  display: flex;
+  flex-flow: wrap;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.wall {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)) , url('../images/macos-monterey-stock-blue-light-layers-5k-4480x2520-5898.jpg');
+  background-attachment: fixed;
+  background-color: aliceblue;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}

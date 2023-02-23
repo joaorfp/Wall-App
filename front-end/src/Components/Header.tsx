@@ -1,14 +1,16 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../Styles/Header.css';
+import tsl1 from '../images/tsl1.png';
 
 function Header() {
   const [username, setUsername] = useState('');
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const storedName = localStorage.getItem('username')
+    const storedName = localStorage.getItem('username');
     if (storedName) {
-      setUsername(storedName)
+      setUsername(storedName);
     } else {
       setUsername('Guest');
     }
@@ -18,17 +20,19 @@ function Header() {
     localStorage.removeItem('token');
     localStorage.removeItem('username');
     navigate('/');
-  }
+  };
 
   return (
-    <header>
-      <h1>{`Hey, ${username}`}</h1>
-      <button
-        type="button"
-        onClick={ logout }
-      >Sign out</button>
+    <header className="header">
+      <div className="div-header">
+        <h1 className="hey-user">{`Hey, ${username}`}</h1>
+        <button type="button" className="btn-logout" onClick={logout}>
+          Sign out
+        </button>
+        <img src={tsl1} alt="logo tsl" className="logo" />
+      </div>
     </header>
-  )
+  );
 }
 
 export default Header;
