@@ -19,10 +19,10 @@ Install the dependencies:
 (env)$ pip install -r requirements.txt
 ```
 
-Create a `.env` file and insert your secret key after installing the pip dependencies:
+Create a file named as `.env` and insert your secret key after installing the pip dependencies:
 
 ```env
-SECRET_KEY=
+SECRET_KEY=examplekey
 ```
 
 ### Usage
@@ -37,7 +37,9 @@ The project must have back-end and front-end running at the same time. Look at t
 
 ### Navigation
 
-Navigate to `http://127.0.0.1:8000/admin`, `http://127.0.0.1:8000/` or `http://127.0.0.1:8000/wall`.
+Now open `http://127.0.0.1:8000/` in your browser and feel free to navigate through the urls below:
+
+[`http://127.0.0.1:8000/admin`, `http://127.0.0.1:8000/` or `http://127.0.0.1:8000/wall`]
 
 ### Tests
 
