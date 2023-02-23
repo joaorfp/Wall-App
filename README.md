@@ -2,14 +2,15 @@
 
 Welcome to the Wall App Project. Here you will be able to Register a new user, Log in and write on the Wall.
 
-### Navigation
+### Clone and Installation
 
+Clone the project in our machine
 Use the command cd to navigate through the files to execute Back-End and Front-End.
+
 ```bash
-cd front-end/
-```
-```bash
-cd back-and/
+git clone git@github.com:joaorfp/Wall-App.git
+cd Wall-App/front-end/
+cd Wall-App/back-end/
 ```
 
 ### Instructions
